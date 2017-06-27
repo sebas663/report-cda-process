@@ -64,7 +64,7 @@ public class SidcaDataRepo implements ISidcaDataRepo {
 			ProcessReportTypeDTO c = new ProcessReportTypeDTO();
 			c.setCode(rs.getString(0));
 			c.setDescription(rs.getString(1));
-			c.setFactoryClass(rs.getString(2));
+			c.setManagerClass(rs.getString(2));
 			c.setQuery(rs.getString(3));
 			return c;
 		}

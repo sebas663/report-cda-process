@@ -16,7 +16,7 @@ public class ProcessReportTypeDTO {
 	/**
 	 * 
 	 */
-	private String factoryClass;
+	private String managerClass;
 	/**
 	 * @return the code
 	 */
@@ -54,16 +54,16 @@ public class ProcessReportTypeDTO {
 		this.query = query;
 	}
 	/**
-	 * @return the factoryClass
+	 * @return the managerClass
 	 */
-	public String getFactoryClass() {
-		return factoryClass;
+	public String getManagerClass() {
+		return managerClass;
 	}
 	/**
-	 * @param factoryClass the factoryClass to set
+	 * @param managerClass the managerClass to set
 	 */
-	public void setFactoryClass(String factoryClass) {
-		this.factoryClass = factoryClass;
+	public void setManagerClass(String managerClass) {
+		this.managerClass = managerClass;
 	}
 	
 }

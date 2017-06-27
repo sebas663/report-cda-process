@@ -1,6 +1,10 @@
 package org.fleni.cda.process.service;
 
-import org.fleni.cda.cxf.client.ExternalReportRemotingServiceClient;
+import java.util.List;
+
+import org.fleni.cda.process.dto.ProcessReportTypeDTO;
+import org.fleni.cda.process.manager.IDataManager;
+import org.fleni.cda.process.manager.DataManagerFactory;
 import org.fleni.cda.process.repository.ISidcaDataRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +29,6 @@ public class ProcessCdaService implements IProcessCdaService {
 	 * 
 	 */
 	@Autowired
-	private ExternalReportRemotingServiceClient soapClient;
-	
-	/**
-	 * 
-	 */
-	@Autowired
 	private ISidcaDataRepo repository;
 
 	/*
@@ -40,19 +38,13 @@ public class ProcessCdaService implements IProcessCdaService {
 	 */
 	@Override
 	@Async("executor")
-	public void processCda(){
-		
+	public void processCda() {
+		DataManagerFactory factory = new DataManagerFactory();
+		List<ProcessReportTypeDTO> lst = repository.selectAllProcessReportType(null);
+		for (ProcessReportTypeDTO dto : lst) {
+			List<String> lstIDs = repository.selectRobjectId(dto.getQuery());
+			IDataManager manager = factory.getManager(dto.getManagerClass());
+			manager.processDataAndSend(lstIDs,1000);
+		}
 	}
-	/**
-	 * 
-	 * @return
-	 * @throws InterruptedException
-	 */
-//	private String retrieveResponse() throws InterruptedException {
-//		String resp = "Se estan procesando los cda de Sidca!!!";
-//		logger.info("Looking up ");
-//		Thread.sleep(10000L);
-//		logger.info("Finish Looking up ");
-//		return resp;
-//	}
 }
