@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://server.remoting.externalreport.cda.fleni.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="externalReportRemotingService" targetNamespace="http://server.remoting.externalreport.cda.fleni.org/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://server.remoting.externalreport.cda.fleni.org/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://server.remoting.externalreport.cda.fleni.org/">
+  <xs:element name="externalReportInformation" type="tns:externalReportInformation"/>
+  <xs:element name="externalReportInformationBatch" type="tns:externalReportInformationBatch"/>
+  <xs:element name="externalReportResponse" type="tns:externalReportResponse"/>
+  <xs:complexType name="externalReportInformationBatch">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="lstExternalReportInformation" nillable="true" type="tns:externalReportInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="externalReportInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="episodeNumber" type="xs:string"/>
+      <xs:element name="firstTime" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="messageJsonData" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="nhc" type="xs:string"/>
+      <xs:element minOccurs="0" name="reportDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="reportId" type="xs:string"/>
+      <xs:element minOccurs="0" name="reportName" type="xs:string"/>
+      <xs:element minOccurs="0" name="reportOriginalId" type="xs:string"/>
+      <xs:element minOccurs="0" name="typeEpisode" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="externalReportResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="externalReportId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="createReportInformationBatch" nillable="true" type="tns:externalReportInformationBatch"/>
+  <xs:element name="createReportInformationBatchResponse" nillable="true" type="tns:externalReportResponse"/>
+  <xs:element name="createReportInformation" nillable="true" type="tns:externalReportInformation"/>
+  <xs:element name="createReportInformationResponse" nillable="true" type="tns:externalReportResponse"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createReportInformationBatch">
+    <wsdl:part element="tns:createReportInformationBatch" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createReportInformationBatchResponse">
+    <wsdl:part element="tns:createReportInformationBatchResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createReportInformation">
+    <wsdl:part element="tns:createReportInformation" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createReportInformationResponse">
+    <wsdl:part element="tns:createReportInformationResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IExternalReportRemotingService">
+    <wsdl:operation name="createReportInformationBatch">
+      <wsdl:input message="tns:createReportInformationBatch" name="createReportInformationBatch">
+    </wsdl:input>
+      <wsdl:output message="tns:createReportInformationBatchResponse" name="createReportInformationBatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createReportInformation">
+      <wsdl:input message="tns:createReportInformation" name="createReportInformation">
+    </wsdl:input>
+      <wsdl:output message="tns:createReportInformationResponse" name="createReportInformationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="externalReportRemotingServiceSoapBinding" type="tns:IExternalReportRemotingService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createReportInformationBatch">
+      <soap:operation soapAction="urn:CreateReportInformationBatch" style="document"/>
+      <wsdl:input name="createReportInformationBatch">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createReportInformationBatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createReportInformation">
+      <soap:operation soapAction="urn:CreateReportInformation" style="document"/>
+      <wsdl:input name="createReportInformation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createReportInformationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="externalReportRemotingService">
+    <wsdl:port binding="tns:externalReportRemotingServiceSoapBinding" name="ExternalReportRemotingService">
+      <soap:address location="http://localhost:8080/cda-mais-integration/ws/ExternalReportRemotingService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
